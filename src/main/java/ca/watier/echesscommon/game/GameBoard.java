@@ -310,6 +310,18 @@ public abstract class GameBoard {
         pawnPromotionMap.removeFromList(side, pair);
     }
 
+    public Map<CasePosition, Boolean> getIsPiecesMovedMap() {
+        return isPiecesMovedMap;
+    }
+
+    public Map<CasePosition, Boolean> getIsPawnUsedSpecialMoveMap() {
+        return isPawnUsedSpecialMoveMap;
+    }
+
+    public Map<CasePosition, Integer> getTurnNumberPieceMap() {
+        return turnNumberPieceMap;
+    }
+
     public boolean isGamePaused() {
         return isGamePaused;
     }
