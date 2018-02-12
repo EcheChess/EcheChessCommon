@@ -33,8 +33,6 @@ public abstract class GameBoard {
 
     //The default position of the board
     private final Map<CasePosition, Pieces> defaultPositions;
-
-
     //The pieces position on the board
     private Map<CasePosition, Pieces> positionPiecesMap;
     //Used to check if the piece have moved
