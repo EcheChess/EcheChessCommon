@@ -314,12 +314,24 @@ public abstract class GameBoard {
         return isPiecesMovedMap;
     }
 
+    public void setIsPiecesMovedMap(Map<CasePosition, Boolean> isPiecesMovedMap) {
+        this.isPiecesMovedMap = isPiecesMovedMap;
+    }
+
     public Map<CasePosition, Boolean> getIsPawnUsedSpecialMoveMap() {
         return isPawnUsedSpecialMoveMap;
     }
 
+    public void setIsPawnUsedSpecialMoveMap(Map<CasePosition, Boolean> isPawnUsedSpecialMoveMap) {
+        this.isPawnUsedSpecialMoveMap = isPawnUsedSpecialMoveMap;
+    }
+
     public Map<CasePosition, Integer> getTurnNumberPieceMap() {
         return turnNumberPieceMap;
+    }
+
+    public void setTurnNumberPieceMap(Map<CasePosition, Integer> turnNumberPieceMap) {
+        this.turnNumberPieceMap = turnNumberPieceMap;
     }
 
     public boolean isGamePaused() {
