@@ -25,6 +25,7 @@ public class MoveHistory {
     private final CasePosition from;
     private final CasePosition to;
     private final Side playerSide;
+    private String extraInfo;
     private MoveType moveType;
     private KingStatus currentKingStatus;
     private KingStatus otherKingStatus;
@@ -71,12 +72,21 @@ public class MoveHistory {
         this.otherKingStatus = otherKingStatus;
     }
 
+    public String getExtraInfo() {
+        return extraInfo;
+    }
+
+    public void setExtraInfo(String extraInfo) {
+        this.extraInfo = extraInfo;
+    }
+
     @Override
     public String toString() {
         return "MoveHistory{" +
                 "from=" + from +
                 ", to=" + to +
                 ", playerSide=" + playerSide +
+                ", extraInfo='" + extraInfo + '\'' +
                 ", moveType=" + moveType +
                 ", currentKingStatus=" + currentKingStatus +
                 ", otherKingStatus=" + otherKingStatus +
