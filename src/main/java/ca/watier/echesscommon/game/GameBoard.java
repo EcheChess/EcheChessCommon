@@ -18,10 +18,13 @@ package ca.watier.echesscommon.game;
 
 import ca.watier.echesscommon.enums.CasePosition;
 import ca.watier.echesscommon.enums.Pieces;
+import ca.watier.echesscommon.enums.Ranks;
 import ca.watier.echesscommon.enums.Side;
 import ca.watier.echesscommon.interfaces.BaseUtils;
 import ca.watier.echesscommon.utils.*;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
@@ -59,6 +62,17 @@ public abstract class GameBoard {
         isPawnUsedSpecialMoveMap = GameUtils.initPawnMap(positionPiecesMap);
         turnNumberPieceMap = GameUtils.initTurnMap(positionPiecesMap);
         pawnPromotionMap = new MultiArrayMap<>();
+    }
+
+    /**
+     * Find the position for a column and a rank
+     *
+     * @param rank
+     * @param column
+     */
+    public CasePosition getPositionByRankAndColumn(@NotNull Ranks rank, char column, @NotNull Side side) {
+        return Arrays.stream(CasePosition.values()).filter(casePosition -> rank.equals(Ranks.getRank(casePosition, side))
+                && casePosition.isOnSameColumn(column)).findFirst().orElse(null);
     }
 
     /**
