@@ -44,14 +44,14 @@ public enum PgnPieceFound {
     public static PgnPieceFound getPieceFromAction(@NotNull String action) {
         PgnPieceFound pgnPieceFoundFromLetter = PAWN;
 
-        for (byte b : action.getBytes()) {
-            PgnPieceFound currentPgnPieceFound = getPieceFromLetter((char) b);
+            for (byte b : action.getBytes()) {
+                PgnPieceFound currentPgnPieceFound = getPieceFromLetter((char) b);
 
-            if (!PAWN.equals(currentPgnPieceFound)) {
-                pgnPieceFoundFromLetter = currentPgnPieceFound;
-                break;
+                if (!PAWN.equals(currentPgnPieceFound)) {
+                    pgnPieceFoundFromLetter = currentPgnPieceFound;
+                    break;
+                }
             }
-        }
 
         return pgnPieceFoundFromLetter;
     }
