@@ -90,7 +90,7 @@ public class PieceSingleMoveSection extends PieceData {
     }
 
     public boolean isFromPositionFullCoordinate() {
-        return row != null && column != null;
+        return (row != null && column != null) || to != null;
     }
 
 

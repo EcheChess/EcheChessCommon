@@ -41,7 +41,6 @@ public class PgnPieceDataTest {
                 PieceDataFactory.from("f", "g1", PgnMoveToken.CAPTURE),
                 PieceDataFactory.from("g1", "Q", PgnMoveToken.PAWN_PROMOTION)
         );
-
     }
 
 
@@ -77,5 +76,10 @@ public class PgnPieceDataTest {
 
         assertThat(PieceSingleMoveSection.getParsedActions("c6")).
                 isEqualTo(PieceDataFactory.from(PgnPieceFound.PAWN, null, null, CasePosition.C6));
+
+        PieceSingleMoveSection pieceSingleMoveSectionNe2 = PieceSingleMoveSection.getParsedActions("Ne2");
+        assertThat(pieceSingleMoveSectionNe2).
+                isEqualTo(PieceDataFactory.from(PgnPieceFound.KNIGHT, null, null, CasePosition.E2));
+        assertThat(pieceSingleMoveSectionNe2.isFromPositionFullCoordinate()).isTrue();
     }
 }
