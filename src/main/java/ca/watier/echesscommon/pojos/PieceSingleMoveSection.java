@@ -58,7 +58,7 @@ public class PieceSingleMoveSection extends PieceData {
         //Remove the ending position
         action = action.substring(0, length - 2);
 
-        switch (length = action.length()) {
+        switch (action.length()) {
             case 0:
                 value.setColumn(null);
                 value.setRow(null);
@@ -92,19 +92,25 @@ public class PieceSingleMoveSection extends PieceData {
     public CasePosition getFromFullCoordinate() {
         CasePosition value = null;
 
-        if (isFromPositionFullCoordinate()) {
-            if (column != null && row != null) {
-                value = CasePosition.valueOf(Character.toString(column).toUpperCase() + row);
-            } else if (to != null) {
-                value = to;
-            }
+        if (isFullSeparatedCoordinate()) {
+            value = CasePosition.valueOf(Character.toString(column).toUpperCase() + row);
+        } else if (isFullCoordinate()) {
+            value = to;
         }
 
         return value;
     }
 
+    private boolean isFullSeparatedCoordinate() {
+        return row != null && column != null;
+    }
+
+    private boolean isFullCoordinate() {
+        return row == null && column == null && to != null;
+    }
+
     public boolean isFromPositionFullCoordinate() {
-        return (row != null && column != null) || to != null;
+        return isFullSeparatedCoordinate() || isFullCoordinate();
     }
 
     public PgnPieceFound getPgnPieceFound() {
