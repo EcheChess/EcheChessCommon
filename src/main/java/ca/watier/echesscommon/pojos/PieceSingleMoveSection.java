@@ -89,13 +89,22 @@ public class PieceSingleMoveSection extends PieceData {
         return value;
     }
 
-    public boolean isFromPositionFullCoordinate() {
-        return (row != null && column != null) || to != null;
+    public CasePosition getFromFullCoordinate() {
+        CasePosition value = null;
+
+        if (isFromPositionFullCoordinate()) {
+            if (column != null && row != null) {
+                value = CasePosition.valueOf(Character.toString(column).toUpperCase() + row);
+            } else if (to != null) {
+                value = to;
+            }
+        }
+
+        return value;
     }
 
-
-    public CasePosition getFromFullCordinate() {
-        return (isFromPositionFullCoordinate()) ? CasePosition.valueOf(Character.toString(column).toUpperCase() + row) : null;
+    public boolean isFromPositionFullCoordinate() {
+        return (row != null && column != null) || to != null;
     }
 
     public PgnPieceFound getPgnPieceFound() {

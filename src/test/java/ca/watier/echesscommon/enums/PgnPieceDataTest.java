@@ -53,7 +53,7 @@ public class PgnPieceDataTest {
         assertThat(pieceSingleMoveSectionNg2e2).
                 isEqualTo(PieceDataFactory.from(PgnPieceFound.KNIGHT, 'g', (byte) 2, CasePosition.E2));
 
-        CasePosition fromFullCordinate = pieceSingleMoveSectionNg2e2.getFromFullCordinate();
+        CasePosition fromFullCordinate = pieceSingleMoveSectionNg2e2.getFromFullCoordinate();
         assertThat(fromFullCordinate).isEqualByComparingTo(CasePosition.G2);
 
         assertThat(PieceSingleMoveSection.getParsedActions("Nbd2")).
