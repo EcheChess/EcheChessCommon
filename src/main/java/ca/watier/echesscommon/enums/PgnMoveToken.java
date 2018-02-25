@@ -17,14 +17,11 @@
 package ca.watier.echesscommon.enums;
 
 
-import ca.watier.echesscommon.utils.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.regex.Pattern;
 
 import static ca.watier.echesscommon.enums.CasePosition.*;
 
@@ -41,17 +38,6 @@ public enum PgnMoveToken {
     QUEENSIDE_CASTLING_CHECKMATE("O-O-O#"),
     NORMAL_MOVE("\0");
 
-    private static final List<PgnMoveToken> BASIC_MOVES = Arrays.asList(CAPTURE, PAWN_PROMOTION);
-    private static final List<PgnMoveToken> NON_MOVES_TOKENS = Arrays.asList( //The order of this list is important for the CASTLING, when removing the tokens
-            CHECK,
-            CHECKMATE,
-            QUEENSIDE_CASTLING,
-            KINGSIDE_CASTLING,
-            QUEENSIDE_CASTLING_CHECK,
-            KINGSIDE_CASTLING_CHECK,
-            QUEENSIDE_CASTLING_CHECKMATE,
-            KINGSIDE_CASTLING_CHECKMATE
-    );
     private List<String> chars = new ArrayList<>();
 
     PgnMoveToken(@NotNull String... chars) {
@@ -106,63 +92,6 @@ public enum PgnMoveToken {
         return chars;
     }
 
-    public static List<PieceDataSection> getParsedActions(@NotNull String action) {
-        List<PieceDataSection> values = new ArrayList<>();
-        List<Pair<PgnMoveToken, Integer>> indexOfActions = new ArrayList<>();
-
-        //Remove all invalid tokens
-        for (PgnMoveToken nonMovesToken : NON_MOVES_TOKENS) {
-            for (String currentChar : nonMovesToken.getChars()) {
-                action = action.replaceAll(Pattern.quote(currentChar), "");
-            }
-        }
-
-        //Find the positions of the tokens in the string
-        for (PgnMoveToken current : BASIC_MOVES) {
-            for (String currentChar : current.getChars()) {
-                int index = action.indexOf(currentChar);
-
-                while (index >= 0) {
-                    indexOfActions.add(new Pair<>(current, index));
-                    index = action.indexOf(currentChar, index + 1);
-                }
-            }
-        }
-
-        int lastIndex = 0;
-        int cuttingPos;
-        String before;
-        String after;
-        for (int i = 0, indexOfActionsSize = indexOfActions.size(); i < indexOfActionsSize; i++) {
-
-            Pair<PgnMoveToken, Integer> currentPair = indexOfActions.get(i);
-            PgnMoveToken currentPgnMoveToken = currentPair.getFirstValue();
-            Integer currentIndex = currentPair.getSecondValue();
-
-            if (currentIndex == null) {
-                continue;
-            }
-
-            Pair<PgnMoveToken, Integer> nextPair = (i < (indexOfActionsSize - 1)) ? indexOfActions.get(i + 1) : null;
-            PieceDataSection currentSection = new PieceDataSection();
-            currentSection.setToken(currentPgnMoveToken);
-
-            before = action.substring(lastIndex, currentIndex);
-            cuttingPos = currentIndex + 1; //To remove the current character from the substring
-
-            after = (nextPair != null) ?
-                    action.substring(cuttingPos, nextPair.getSecondValue()) :
-                    action.substring(cuttingPos, action.length());
-
-            currentSection.setBefore(before);
-            currentSection.setAfter(after);
-            values.add(currentSection);
-            lastIndex = cuttingPos;
-        }
-
-        return values;
-    }
-
     public static CasePosition getCastlingRookPosition(PgnMoveToken pgnMoveToken, Side playerSide) {
         if (!PgnMoveToken.isCastling(pgnMoveToken)) {
             return null;
@@ -198,73 +127,5 @@ public enum PgnMoveToken {
         return PgnMoveToken.KINGSIDE_CASTLING.equals(pgnMoveToken) ||
                 PgnMoveToken.KINGSIDE_CASTLING_CHECK.equals(pgnMoveToken) ||
                 PgnMoveToken.KINGSIDE_CASTLING_CHECKMATE.equals(pgnMoveToken);
-    }
-
-    public static class PieceDataSection {
-        private String before;
-        private String after;
-        private PgnMoveToken token;
-
-        public PieceDataSection(String before, String after, PgnMoveToken token) {
-            this.before = before;
-            this.after = after;
-            this.token = token;
-        }
-
-        public PieceDataSection() {
-        }
-
-        public static PieceDataSection from(String before, String after, PgnMoveToken token) {
-            return new PieceDataSection(before, after, token);
-        }
-
-
-        public String getBefore() {
-            return before;
-        }
-
-        public void setBefore(String before) {
-            this.before = before;
-        }
-
-        public String getAfter() {
-            return after;
-        }
-
-        public void setAfter(String after) {
-            this.after = after;
-        }
-
-        public PgnMoveToken getToken() {
-            return token;
-        }
-
-        public void setToken(PgnMoveToken token) {
-            this.token = token;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(before, after, token);
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            PieceDataSection that = (PieceDataSection) o;
-            return Objects.equals(before, that.before) &&
-                    Objects.equals(after, that.after) &&
-                    token == that.token;
-        }
-
-        @Override
-        public String toString() {
-            return "PieceDataSection{" +
-                    "before='" + before + '\'' +
-                    ", after='" + after + '\'' +
-                    ", token=" + token +
-                    '}';
-        }
     }
 }
