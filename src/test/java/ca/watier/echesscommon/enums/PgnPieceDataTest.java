@@ -81,5 +81,8 @@ public class PgnPieceDataTest {
         assertThat(pieceSingleMoveSectionNe2).
                 isEqualTo(PieceDataFactory.from(PgnPieceFound.KNIGHT, null, null, CasePosition.E2));
         assertThat(pieceSingleMoveSectionNe2.isFromPositionFullCoordinate()).isTrue();
+
+        assertThat(PieceSingleMoveSection.getParsedActions("Qbe2+")).
+                isEqualTo(PieceDataFactory.from(PgnPieceFound.QUEEN, 'b', null, CasePosition.E2));
     }
 }

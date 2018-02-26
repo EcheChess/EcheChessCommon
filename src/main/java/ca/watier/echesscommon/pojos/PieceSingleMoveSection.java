@@ -23,6 +23,7 @@ import ca.watier.echesscommon.game.PieceData;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class PieceSingleMoveSection extends PieceData {
     private PgnPieceFound pgnPieceFound;
@@ -46,6 +47,13 @@ public class PieceSingleMoveSection extends PieceData {
         PieceSingleMoveSection value = new PieceSingleMoveSection();
         PgnPieceFound pieceFromAction = PgnPieceFound.getPieceFromAction(action);
         value.setPgnPieceFound(pieceFromAction);
+
+        //Remove all invalid tokens
+        for (PgnMoveToken nonMovesToken : NON_MOVES_TOKENS) {
+            for (String currentChar : nonMovesToken.getChars()) {
+                action = action.replaceAll(Pattern.quote(currentChar), "");
+            }
+        }
 
         //Remove the piece letter from the string, if not a pawn
         if (!PgnPieceFound.PAWN.equals(pieceFromAction)) {
