@@ -273,6 +273,11 @@ public abstract class GameBoard {
         this.turnNumberPieceMap = GameUtils.initTurnMap(positionPiecesMap);
     }
 
+    public final void setPositionPiecesMapTo(Map<CasePosition, Pieces> positionPiecesMap) {
+        Assert.assertNotEmpty(positionPiecesMap);
+        this.positionPiecesMap = new EnumMap<>(positionPiecesMap);
+    }
+
     public int getBlackTurnNumber() {
         return blackTurnNumber;
     }
@@ -357,4 +362,6 @@ public abstract class GameBoard {
     public boolean isGameDraw() {
         return isGameDraw;
     }
+
+
 }
