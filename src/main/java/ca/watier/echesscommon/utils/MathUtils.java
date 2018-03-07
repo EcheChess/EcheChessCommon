@@ -19,7 +19,7 @@ package ca.watier.echesscommon.utils;
 import ca.watier.echesscommon.enums.CasePosition;
 import ca.watier.echesscommon.enums.Direction;
 import ca.watier.echesscommon.interfaces.BaseUtils;
-import org.apache.commons.math3.util.Precision;
+import com.google.common.math.DoubleMath;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class MathUtils implements BaseUtils {
         double partTwo = Math.pow((double) to.getY() - yFrom, 2);
         double disRadius = Math.pow(getDistanceBetweenPositions(xFrom, yFrom, xRadius, yRadius), 2);
 
-        return Precision.equals(partOne + partTwo, disRadius, EPS);
+        return DoubleMath.fuzzyEquals(partOne + partTwo, disRadius, EPS);
     }
 
     /**
@@ -249,7 +249,7 @@ public class MathUtils implements BaseUtils {
         m = (m != null) ? m : 0;
         float b = yCurrent - (m * xCurrent);
 
-        return Precision.equals((float) yToCheck, m * xToCheck + b, EPS);
+        return DoubleMath.fuzzyEquals((float) yToCheck, m * xToCheck + b, EPS);
     }
 
     /**
