@@ -17,14 +17,11 @@
 package ca.watier.echechess.common.utils;
 
 
-
 import ca.watier.echechess.common.enums.CasePosition;
 import ca.watier.echechess.common.enums.Direction;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 /**

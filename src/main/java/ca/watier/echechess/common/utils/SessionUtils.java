@@ -21,6 +21,8 @@ import ca.watier.echechess.common.sessions.Player;
 
 import javax.servlet.http.HttpSession;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * Created by yannick on 4/23/2017.
  */
@@ -36,10 +38,10 @@ public class SessionUtils implements BaseUtils {
      * @return
      */
     public static Player getPlayer(HttpSession session) {
+        assertThat(session).isNotNull();
 
-        Assert.assertNotNull(session);
         Player player = (Player) session.getAttribute(Constants.PLAYER);
-        Assert.assertNotNull(player);
+        assertThat(player).isNotNull();
 
         return player;
     }

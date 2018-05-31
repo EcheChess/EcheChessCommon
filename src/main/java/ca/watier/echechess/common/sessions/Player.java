@@ -16,13 +16,13 @@
 
 package ca.watier.echechess.common.sessions;
 
-import ca.watier.echechess.common.utils.Assert;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by yannick on 4/17/2017.
@@ -34,17 +34,17 @@ public class Player implements Serializable {
     private List<UUID> uiSessionList = new ArrayList<>();
 
     public void addCreatedGame(UUID uuid) {
-        Assert.assertNotNull(uuid);
+        assertThat(uuid).isNotNull();
         createdGameList.add(uuid);
     }
 
     public void addJoinedGame(UUID uuid) {
-        Assert.assertNotNull(uuid);
+        assertThat(uuid).isNotNull();
         joinedGameList.add(uuid);
     }
 
     public void addUiSession(UUID uuid) {
-        Assert.assertNotNull(uuid);
+        assertThat(uuid).isNotNull();
         uiSessionList.add(uuid);
     }
 

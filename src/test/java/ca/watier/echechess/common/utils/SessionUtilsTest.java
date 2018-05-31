@@ -39,6 +39,6 @@ public class SessionUtilsTest {
 
         assertThatExceptionOfType(AssertionError.class).isThrownBy(() ->
                 SessionUtils.getPlayer(httpSessionWithoutPlayer)
-        ).withMessage("The object cannot be null !");
+        );
     }
 }

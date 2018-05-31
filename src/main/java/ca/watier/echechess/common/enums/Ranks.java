@@ -16,7 +16,7 @@
 
 package ca.watier.echechess.common.enums;
 
-import ca.watier.echechess.common.utils.Assert;
+import org.assertj.core.api.Assertions;
 
 /**
  * Created by yannick on 7/5/2017.
@@ -41,7 +41,8 @@ public enum Ranks {
     }
 
     public static Ranks getRank(CasePosition position, Side side) {
-        Assert.assertNotNull(position, side);
+        Assertions.assertThat(position).isNotNull();
+        Assertions.assertThat(side).isNotNull();
 
         if (Side.OBSERVER.equals(side)) {
             return null;

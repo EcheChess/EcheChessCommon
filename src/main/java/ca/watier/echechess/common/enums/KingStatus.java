@@ -16,7 +16,7 @@
 
 package ca.watier.echechess.common.enums;
 
-import ca.watier.echechess.common.utils.Assert;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by yannick on 5/14/2017.
@@ -25,7 +25,7 @@ public enum KingStatus {
     CHECK, CHECKMATE, OK, STALEMATE;
 
     public static boolean isCheckOrCheckMate(KingStatus kingStatus) {
-        Assert.assertNotNull(kingStatus);
+        assertThat(kingStatus).isNotNull();
 
         return KingStatus.CHECK.equals(kingStatus) || KingStatus.CHECKMATE.equals(kingStatus);
     }

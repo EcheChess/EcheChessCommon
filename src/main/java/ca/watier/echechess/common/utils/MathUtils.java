@@ -26,6 +26,7 @@ import java.util.List;
 
 import static ca.watier.echechess.common.enums.CasePosition.getCasePositionByCoor;
 import static ca.watier.echechess.common.enums.Direction.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by yannick on 4/25/2017.
@@ -47,7 +48,8 @@ public class MathUtils implements BaseUtils {
      * @return
      */
     public static boolean isPositionOnCirclePerimeter(CasePosition from, CasePosition to, float xRadius, float yRadius) {
-        Assert.assertNotNull(from, to);
+        assertThat(from).isNotNull();
+        assertThat(to).isNotNull();
 
         //(x−a)^2 + (y−b)^2 = r^2
         int xFrom = from.getX();
@@ -68,7 +70,7 @@ public class MathUtils implements BaseUtils {
      * @return
      */
     public static double getDistanceBetweenPositions(float xFrom, float yFrom, float xTo, float yTo) {
-        Assert.assertNotNull(yFrom);
+        assertThat(yFrom).isNotNull();
 
         double partOne = Math.pow(xFrom - xTo, 2);
         double partTwo = Math.pow(yFrom - yTo, 2);
@@ -116,7 +118,8 @@ public class MathUtils implements BaseUtils {
      * @return
      */
     public static CasePosition getNearestPositionFromDirection(CasePosition casePosition, Direction direction, int nbOfCases) {
-        Assert.assertNotNull(casePosition, direction);
+        assertThat(casePosition).isNotNull();
+        assertThat(direction).isNotNull();
 
         CasePosition position = null;
 
@@ -161,7 +164,8 @@ public class MathUtils implements BaseUtils {
      * @return
      */
     public static Integer getDistanceBetweenPositionsWithCommonDirection(CasePosition from, CasePosition to) {
-        Assert.assertNotNull(from, to);
+        assertThat(from).isNotNull();
+        assertThat(to).isNotNull();
 
         Direction directionFromPosition = getDirectionFromPosition(from, to);
 
@@ -187,7 +191,8 @@ public class MathUtils implements BaseUtils {
      * @return
      */
     public static Direction getDirectionFromPosition(CasePosition from, CasePosition to) {
-        Assert.assertNotNull(from, to);
+        assertThat(from).isNotNull();
+        assertThat(to).isNotNull();
 
         if (from == to) { //Same
             return null;
@@ -234,7 +239,9 @@ public class MathUtils implements BaseUtils {
      * @return
      */
     public static boolean isPositionInLine(CasePosition first, CasePosition second, CasePosition toCheck) {
-        Assert.assertNotNull(first, second, toCheck);
+        assertThat(first).isNotNull();
+        assertThat(second).isNotNull();
+        assertThat(toCheck).isNotNull();
 
         int yCurrent = first.getY();
         int xCurrent = first.getX();
@@ -260,7 +267,8 @@ public class MathUtils implements BaseUtils {
      * @return
      */
     public static double getDistanceBetweenPositions(CasePosition from, CasePosition to) {
-        Assert.assertNotNull(from, to);
+        assertThat(from).isNotNull();
+        assertThat(to).isNotNull();
 
         return getDistanceBetweenPositions(from.getX(), from.getY(), to.getX(), to.getY());
     }
@@ -273,7 +281,8 @@ public class MathUtils implements BaseUtils {
      * @return
      */
     public static Float getSlopeFromPosition(CasePosition from, CasePosition to) {
-        Assert.assertNotNull(from, to);
+        assertThat(from).isNotNull();
+        assertThat(to).isNotNull();
 
         float xDiff = (float) from.getX() - to.getX();
         float yDiff = (float) from.getY() - to.getY();
@@ -293,7 +302,8 @@ public class MathUtils implements BaseUtils {
      * @return
      */
     public static List<CasePosition> getPositionsBetweenTwoPosition(CasePosition from, CasePosition to) {
-        Assert.assertNotNull(from, to);
+        assertThat(from).isNotNull();
+        assertThat(to).isNotNull();
         List<CasePosition> positions = new ArrayList<>();
 
         int xFrom = from.getX();
@@ -365,7 +375,8 @@ public class MathUtils implements BaseUtils {
      * @return
      */
     public static boolean isPositionVertical(CasePosition first, CasePosition second) {
-        Assert.assertNotNull(first, second);
+        assertThat(first).isNotNull();
+        assertThat(second).isNotNull();
 
         return first.getX() == second.getX();
     }
@@ -379,7 +390,8 @@ public class MathUtils implements BaseUtils {
      * @return
      */
     public static boolean isPositionHorizontal(CasePosition first, CasePosition second) {
-        Assert.assertNotNull(first, second);
+        assertThat(first).isNotNull();
+        assertThat(second).isNotNull();
 
         return first.getY() == second.getY();
     }

@@ -17,8 +17,8 @@
 package ca.watier.echechess.common.tests;
 
 import ca.watier.echechess.common.enums.Side;
-import ca.watier.echechess.common.interfaces.WebSocketService;
 import ca.watier.echechess.common.impl.WebSocketServiceTestImpl;
+import ca.watier.echechess.common.interfaces.WebSocketService;
 import ca.watier.echechess.common.responses.GameScoreResponse;
 
 /**

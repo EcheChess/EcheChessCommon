@@ -16,8 +16,8 @@
 
 package ca.watier.echechess.common.interfaces;
 
-import ca.watier.echechess.common.enums.Side;
 import ca.watier.echechess.common.enums.ChessEventMessage;
+import ca.watier.echechess.common.enums.Side;
 
 /**
  * Created by yannick on 6/10/2017.

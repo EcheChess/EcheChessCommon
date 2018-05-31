@@ -16,8 +16,9 @@
 
 package ca.watier.echechess.common.enums;
 
-import ca.watier.echechess.common.utils.Assert;
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by yannick on 4/18/2017.
@@ -25,26 +26,26 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Pieces {
-    W_KING("White King", '♔', Side.WHITE, (byte) -128),
-    W_QUEEN("White Queen ", '♕', Side.WHITE, (byte) 9),
-    W_ROOK("White Rook", '♖', Side.WHITE, (byte) 5),
-    W_BISHOP("White Bishop", '♗', Side.WHITE, (byte) 3),
-    W_KNIGHT("White Knight", '♘', Side.WHITE, (byte) 3),
-    W_PAWN("White Pawn", '♙', Side.WHITE, (byte) 1),
-    B_KING("Black King", '♚', Side.BLACK, (byte) -128),
-    B_QUEEN("Black Queen ", '♛', Side.BLACK, (byte) 9),
-    B_ROOK("Black Rook", '♜', Side.BLACK, (byte) 5),
-    B_BISHOP("Black Bishop", '♝', Side.BLACK, (byte) 3),
-    B_KNIGHT("Black Knight", '♞', Side.BLACK, (byte) 3),
-    B_PAWN("Black Pawn", '♟', Side.BLACK, (byte) 1);
+    W_KING("White King", "&#9812;", Side.WHITE, (byte) -128),
+    W_QUEEN("White Queen ", "&#9813;", Side.WHITE, (byte) 9),
+    W_ROOK("White Rook", "&#9814;", Side.WHITE, (byte) 5),
+    W_BISHOP("White Bishop", "&#9815;", Side.WHITE, (byte) 3),
+    W_KNIGHT("White Knight", "&#9816;", Side.WHITE, (byte) 3),
+    W_PAWN("White Pawn", "&#9817;", Side.WHITE, (byte) 1),
+    B_KING("Black King", "&#9818;", Side.BLACK, (byte) -128),
+    B_QUEEN("Black Queen ", "&#9819;", Side.BLACK, (byte) 9),
+    B_ROOK("Black Rook", "&#9820;", Side.BLACK, (byte) 5),
+    B_BISHOP("Black Bishop", "&#9821;", Side.BLACK, (byte) 3),
+    B_KNIGHT("Black Knight", " &#9822;", Side.BLACK, (byte) 3),
+    B_PAWN("Black Pawn", "&#9823;", Side.BLACK, (byte) 1);
 
-    private final char unicodeIcon;
+    private final String unicodeIcon;
     private final String enumName;
     private final Side side;
     private final String name;
     private byte point;
 
-    Pieces(String name, char unicodeIcon, Side side, byte point) {
+    Pieces(String name, String unicodeIcon, Side side, byte point) {
         this.name = name;
         this.unicodeIcon = unicodeIcon;
         this.side = side;
@@ -53,19 +54,19 @@ public enum Pieces {
     }
 
     public static boolean isKing(Pieces piece) {
-        Assert.assertNotNull(piece);
+        assertThat(piece).isNotNull();
 
         return W_KING.equals(piece) || B_KING.equals(piece);
     }
 
     public static boolean isKnight(Pieces piece) {
-        Assert.assertNotNull(piece);
+        assertThat(piece).isNotNull();
 
         return W_KNIGHT.equals(piece) || B_KNIGHT.equals(piece);
     }
 
     public static Pieces getKingBySide(Side playerSide) {
-        Assert.assertNotNull(playerSide);
+        assertThat(playerSide).isNotNull();
 
         if (Side.OBSERVER.equals(playerSide)) {
             return null;
@@ -75,13 +76,15 @@ public enum Pieces {
     }
 
     public static boolean isRook(Pieces piece) {
-        Assert.assertNotNull(piece);
+        assertThat(piece).isNotNull();
 
         return W_ROOK.equals(piece) || B_ROOK.equals(piece);
     }
 
     public static boolean isSameSide(Pieces first, Pieces second) {
-        Assert.assertNotNull(first, second);
+        assertThat(first).isNotNull();
+        assertThat(second).isNotNull();
+
         return first.getSide().equals(second.getSide());
     }
 
@@ -90,24 +93,24 @@ public enum Pieces {
     }
 
     public static boolean isPawn(Pieces piece) {
-        Assert.assertNotNull(piece);
+        assertThat(piece).isNotNull();
 
         return W_PAWN.equals(piece) || B_PAWN.equals(piece);
     }
 
     public static boolean isBishop(Pieces piece) {
-        Assert.assertNotNull(piece);
+        assertThat(piece).isNotNull();
 
         return W_BISHOP.equals(piece) || B_BISHOP.equals(piece);
     }
 
     public static boolean isQueen(Pieces piece) {
-        Assert.assertNotNull(piece);
+        assertThat(piece).isNotNull();
 
         return W_QUEEN.equals(piece) || B_QUEEN.equals(piece);
     }
 
-    public char getUnicodeIcon() {
+    public String getUnicodeIcon() {
         return unicodeIcon;
     }
 
